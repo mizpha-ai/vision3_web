@@ -3,8 +3,6 @@
 // 이 파일은 app router의 루트 레이아웃이다.
 // 모든 페이지를 감싸는 최상위 공통 구조를 정의하며,
 // 메타데이터, 전역 CSS, 폰트 링크, html/body 속성 등을 여기서 설정한다.
-// 이전 버전과 비교하면, 지금은 LanguageProvider가 추가되어
-// 전체 앱이 다국어 상태를 공유할 수 있게 바뀌었다.
 
 import type { Metadata } from "next";
 import "./globals.css";
@@ -16,8 +14,6 @@ import { LanguageProvider } from "@/lib/i18n";
 // Next.js에서 SEO 및 문서 head 기본값으로 활용되는 metadata
 export const metadata: Metadata = {
   // 브라우저 탭 제목
-  // 이전 버전은 "AI Production Studio | From Character to Video"였지만,
-  // 최신 코드는 더 짧은 "AI Production Studio"로 바뀌었다.
   title: "AI Production Studio",
 
   // 검색엔진/공유 미리보기용 설명
@@ -65,8 +61,7 @@ export default function RootLayout({
 
       <body className="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] antialiased noise-overlay">
         <LanguageProvider>{children}</LanguageProvider>
-        {/* 이전 버전에서는 children을 바로 렌더링했지만,
-            지금은 LanguageProvider로 한 번 감싸고 있다.
+        {/* LanguageProvider로 한 번 감싸고 있다.
             즉, 앱 전체 어디서든 useLanguage 훅을 통해 현재 언어와 번역 함수에 접근할 수 있게 된 구조다.
             다국어를 쓰는 Header, HeroSection, OverviewSection 같은 컴포넌트들이
             전부 이 provider에 의존하고 있다고 보면 된다. */}
@@ -74,5 +69,3 @@ export default function RootLayout({
     </html>
   );
 }
-// 정리하면 RootLayout의 기본 역할은 이전과 같지만,
-// 전체 앱을 LanguageProvider로 감싸면서 다국어 상태를 전역으로 공급하는 구조가 추가된 것이 가장 큰 변화다.
