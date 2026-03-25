@@ -1,15 +1,33 @@
-// vision3_web\src\lib\i18n-b2b.ts
+// vision3_web/src/lib/i18n-b2b.ts
+
+// 이 파일은 business 전용 다국어 번역 사전이다.
+// 즉, /business 아래에서 쓰는 문구들을 언어별로 모아둔 파일이다.
+// 일반 사이트 번역은 i18n.tsx 안의 translations 객체가 담당하고,
+// 이 파일은 그중에서도 b2b.* 키들만 따로 분리해서 관리하는 구조다.
+// 실제로는 i18n.tsx가 이 파일을 import 해서
+// 메인 번역 사전과 함께 합쳐서 사용한다.
 
 import { Language } from "./i18n";
+// Language 타입(en | ko | ja)을 i18n.tsx에서 가져온다.
+// 이 파일은 그 타입을 기준으로 언어별 번역 객체 구조를 맞춘다.
 
 const b2bTranslations: Record<Language, Record<string, string>> = {
+  // Record<Language, Record<string, string>> 구조이므로
+  // en / ko / ja 각각이 하나의 큰 문자열 사전 역할을 한다.
+  // 안쪽 키는 "b2b.nav.intro" 같은 번역 키이고,
+  // 값은 실제 화면에 보여줄 문자열이다.
+
   en: {
+    // 영어 번역 묶음
+    // business 페이지들에서 현재 언어가 en일 때 이 값들이 사용된다.
+
     // Nav
     "b2b.nav.name": "Vision3 Business",
     "b2b.nav.intro": "About",
     "b2b.nav.packages": "Packages",
     "b2b.nav.inquiry": "Inquiry",
     "b2b.nav.backMain": "Vision3 Home",
+    // business 헤더/푸터 메뉴에서 쓰는 네비게이션 문구들이다.
 
     // Hero
     "b2b.hero.badge": "B2B Solutions",
@@ -18,8 +36,11 @@ const b2bTranslations: Record<Language, Record<string, string>> = {
     "b2b.hero.subtitle": "From concept to final delivery — we produce high-impact video content at unprecedented speed with our AI production pipeline. Trusted by enterprise clients across industries.",
     "b2b.hero.cta1": "View Packages",
     "b2b.hero.cta2": "Contact Us",
-    
+    // /business 메인 hero 섹션에서 쓰는 문구들이다.
+    // title1, title2를 나눈 이유는 페이지에서 두 번째 줄만 강조 스타일을 줄 수 있게 하기 위해서다.
+
     "b2b.partners.title": "Working with over 110 brands worldwide",
+    // 파트너 로고 마키 위에 들어가는 신뢰 문구다.
 
     // Stats
     "b2b.stat1.val": "70%",
@@ -30,6 +51,8 @@ const b2bTranslations: Record<Language, Record<string, string>> = {
     "b2b.stat3.label": "First Draft",
     "b2b.stat4.val": "120+",
     "b2b.stat4.label": "Projects Delivered",
+    // hero 오른쪽 통계 카드에서 쓰는 숫자/라벨 세트다.
+    // val과 label을 따로 둬서 카드 UI에서 숫자와 설명을 분리 출력한다.
 
     // About section
     "b2b.about.badge": "Why Vision3",
@@ -47,6 +70,8 @@ const b2bTranslations: Record<Language, Record<string, string>> = {
     "b2b.about.f5.desc": "Built-in translation pipeline and localized subtitle generation. Produce content for global markets from a single production run.",
     "b2b.about.f6.title": "Compliance-Aware",
     "b2b.about.f6.desc": "Structured review workflows designed for regulated industries. Built-in checkpoints for legal, medical, and financial compliance review.",
+    // /business 메인 페이지의 About 섹션 카드 6개에 대응되는 키들이다.
+    // f1~f6처럼 번호를 붙여 둔 이유는 페이지 코드에서 반복문으로 불러오기 쉽게 하기 위해서다.
 
     // Process
     "b2b.process.badge": "Our Process",
@@ -59,11 +84,14 @@ const b2bTranslations: Record<Language, Record<string, string>> = {
     "b2b.process.s3.desc": "Content is generated through our AI pipeline with human quality gates at every stage.",
     "b2b.process.s4": "Review & Delivery",
     "b2b.process.s4.desc": "You review, we revise. Final assets are delivered in all required formats and resolutions.",
+    // business 진행 과정 4단계 설명에 쓰는 키들이다.
+    // s1~s4 구조라서 페이지 코드에서 배열처럼 순회하며 사용할 수 있다.
 
     // Industries
     "b2b.industries.badge": "Industries We Serve",
     "b2b.industries.title": "Tailored Solutions by Industry",
     "b2b.industries.subtitle": "Each industry has unique content needs. Our packages are designed with industry-specific considerations from the ground up.",
+    // 산업군 소개 섹션 제목/설명이다.
 
     // Packages page
     "b2b.pkg.badge": "Package Lineup",
@@ -73,6 +101,7 @@ const b2bTranslations: Record<Language, Record<string, string>> = {
     "b2b.pkg.comingSoon": "Videos Coming Soon",
     "b2b.pkg.details": "Key Deliverables",
     "b2b.pkg.inquire": "Inquire About This Package",
+    // /business/packages 페이지 전반에서 쓰는 공통 문구다.
 
     // Game packages
     "b2b.pkg.game.title": "Gaming",
@@ -81,48 +110,58 @@ const b2bTranslations: Record<Language, Record<string, string>> = {
     "b2b.pkg.game1.desc": "The Game IP Launch Teaser Package provides essential teaser assets needed for new title reveals, pre-registration campaigns, and launch-window marketing. Combining Vision3's AI-native production pipeline with professional creative direction, it delivers both worldbuilding impact and execution speed.",
     "b2b.pkg.game2.title": "Game LiveOps / Update Package",
     "b2b.pkg.game2.desc": "The LiveOps Update Pack provides a monthly supply of update, event, and operational announcement video assets. Its template-based repeat production structure reduces content production burden and delivery risk for operations teams.",
+    // 게임 산업군에 속한 패키지 문구들이다.
+    // game.title은 탭/카테고리 제목,
+    // game1, game2는 실제 패키지 카드 내용이다.
 
     // Beauty
     "b2b.pkg.beauty.title": "Beauty",
     "b2b.pkg.beauty.icon": "💄",
     "b2b.pkg.beauty1.title": "Beauty New Product Launch Shortform Package",
     "b2b.pkg.beauty1.desc": "The Beauty Launch Shortform Pack rapidly assembles essential shortform assets needed during the initial phase of a new product launch. It balances brand mood and product USP to reduce preparation time for SNS and ad campaigns.",
+    // 뷰티 산업군 패키지 문구
 
     // Edu
     "b2b.pkg.edu.title": "Education",
     "b2b.pkg.edu.icon": "📚",
     "b2b.pkg.edu1.title": "E-Learning & Education Content Package",
     "b2b.pkg.edu1.desc": "The E-learning & Education Content Pack separates promotional and actual learning content by purpose. It can be configured in stages from promotional assets for student acquisition to micro-learning video modules. Type A (promotional) and Type B (learning) are recommended to be operated separately.",
+    // 교육 산업군 패키지 문구
 
     // Fashion
     "b2b.pkg.fashion.title": "Fashion",
     "b2b.pkg.fashion.icon": "👗",
     "b2b.pkg.fashion1.title": "Fashion Seasonal Lookbook Film Package",
     "b2b.pkg.fashion1.desc": "The Fashion Seasonal Lookbook Film Pack delivers lookbook video packages that convey the mood, silhouette, texture, and brand story of seasonal collections. It can include derivative assets usable across lookbooks, campaigns, and social media.",
+    // 패션 산업군 패키지 문구
 
     // Entertainment
     "b2b.pkg.ent.title": "Entertainment",
     "b2b.pkg.ent.icon": "🎬",
     "b2b.pkg.ent1.title": "Web Drama / Film Package",
     "b2b.pkg.ent1.desc": "The Entertainment Pack provides teaser, trailer, and promotional video assets for web dramas and films in a package format. It combines main trailer assets with derivative promotional assets aligned to release schedules for maximum initial exposure.",
+    // 엔터테인먼트 산업군 패키지 문구
 
     // Finance
     "b2b.pkg.finance.title": "Finance / Insurance / Legal",
     "b2b.pkg.finance.icon": "🏦",
     "b2b.pkg.finance1.title": "Finance / Insurance Content Package",
     "b2b.pkg.finance1.desc": "The Finance / Insurance Content Pack is designed for branding, product information, and customer communication purposes in the financial, insurance, and legal sectors. Its structured workflow considers expression accuracy and regulatory review to reduce practical revision burden.",
+    // 금융/보험/법무 산업군 패키지 문구
 
     // HR
     "b2b.pkg.hr.title": "HR Training",
     "b2b.pkg.hr.icon": "👥",
     "b2b.pkg.hr1.title": "HR Training Video Package",
     "b2b.pkg.hr1.desc": "The HR Training Video Pack is an internal training video package designed for the repetitive production needs of HR and training teams. It enables fast and consistent production by templatizing onboarding, mandatory training, job-specific training, and leadership training.",
+    // HR/교육 산업군 패키지 문구
 
     // Healthcare
     "b2b.pkg.health.title": "Healthcare",
     "b2b.pkg.health.icon": "🏥",
     "b2b.pkg.health1.title": "Healthcare Content Package",
     "b2b.pkg.health1.desc": "The Healthcare Content Pack is a video package designed for introduction, guidance, and explanation purposes of healthcare services, institutions, and solutions. Designed with accuracy and reliability as priorities, it provides a stable production process even in environments requiring medical and professional review.",
+    // 헬스케어 산업군 패키지 문구
 
     // Contact/Inquiry page
     "b2b.inquiry.badge": "Work With Us",
@@ -158,13 +197,20 @@ const b2bTranslations: Record<Language, Record<string, string>> = {
     "b2b.inquiry.form.successTitle": "Inquiry Submitted Successfully",
     "b2b.inquiry.form.successDesc": "Thank you for your interest. Our business team will review your inquiry and respond within one business day.",
     "b2b.inquiry.form.another": "Submit another inquiry",
+    // business 문의 폼에서 쓰는 전체 문구 묶음이다.
+    // 라벨, placeholder, 성공 메시지까지 전부 여기서 관리한다.
 
     // Footer CTA
     "b2b.cta.title": "Ready to Transform Your Content Production?",
     "b2b.cta.desc": "Let's discuss how Vision3's AI production platform can accelerate your content strategy.",
+    // business 메인 마지막 CTA 섹션 문구다.
   },
 
   ko: {
+    // 한국어 번역 묶음
+    // 위 영어 키와 1:1로 대응되며,
+    // 현재 언어가 ko일 때 이 값들이 사용된다.
+
     "b2b.nav.name": "Vision3 Business",
     "b2b.nav.intro": "사업소개",
     "b2b.nav.packages": "패키지 소개",
@@ -309,6 +355,10 @@ const b2bTranslations: Record<Language, Record<string, string>> = {
   },
 
   ja: {
+    // 일본어 번역 묶음
+    // 역시 동일한 키 구조를 유지하면서 일본어 값만 넣는다.
+    // 언어별 키 구조가 동일해야 t("같은키") 호출이 화면별로 안정적으로 동작한다.
+
     "b2b.nav.name": "Vision3 Business",
     "b2b.nav.intro": "事業紹介",
     "b2b.nav.packages": "パッケージ紹介",
@@ -454,3 +504,6 @@ const b2bTranslations: Record<Language, Record<string, string>> = {
 };
 
 export default b2bTranslations;
+// 이 객체를 default export 해서
+// i18n.tsx에서 import 후 전체 번역 lookup에 합쳐서 사용한다.
+// 즉, 이 파일은 business 번역 전용 데이터 소스라고 보면 된다.

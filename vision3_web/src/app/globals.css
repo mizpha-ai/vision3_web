@@ -1,28 +1,44 @@
+/* vision3_web/src/app/globals.css */
+
 @import "tailwindcss";
+/* Tailwind CSS를 불러오는 시작점이다.
+   app/layout.tsx에서 이 파일을 import 하고 있어서
+   사이트 전체 스타일의 진입점 역할을 한다. */
 
 @theme {
+  /* 프로젝트 전체에서 재사용할 디자인 토큰 정의 */
+
   --font-display: "Syne", sans-serif;
+  /* 제목용 폰트 */
+
   --font-body: "Plus Jakarta Sans", sans-serif;
+  /* 본문용 폰트 */
 
   --color-bg-primary: #06060e;
   --color-bg-secondary: #0a0a18;
   --color-bg-tertiary: #0f0f24;
+  /* 배경 계열 색상 */
+
   --color-bg-card: rgba(255, 255, 255, 0.03);
   --color-bg-card-hover: rgba(255, 255, 255, 0.06);
+  /* glass-card에 들어가는 반투명 카드 색 */
 
   --color-accent-cyan: #00d4ff;
   --color-accent-blue: #0ea5e9;
   --color-accent-purple: #8b5cf6;
   --color-accent-magenta: #ec4899;
   --color-accent-emerald: #10b981;
+  /* 강조 색상들 */
 
   --color-text-primary: #f0f0f5;
   --color-text-secondary: #9ca3af;
   --color-text-muted: #6b7280;
+  /* 텍스트 계층 */
 
   --color-border-subtle: rgba(255, 255, 255, 0.06);
   --color-border-medium: rgba(255, 255, 255, 0.1);
   --color-border-accent: rgba(0, 212, 255, 0.3);
+  /* 테두리 계열 */
 }
 
 @layer base {
@@ -30,12 +46,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* 전체 요소의 기본 여백 제거 및 box-sizing 통일 */
   }
 
   html {
     scroll-behavior: smooth;
+    /* 앵커 이동 시 부드러운 스크롤 */
+
     background-color: var(--color-bg-primary);
     color: var(--color-text-primary);
+    /* 문서 전체 기본 배경/글자색 */
   }
 
   body {
@@ -44,31 +64,41 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    /* 가로 스크롤 방지 + 글꼴 렌더링 보정 */
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     line-height: 1.15;
     font-weight: 700;
+    /* 모든 제목 태그 기본 스타일 */
   }
 
   ::selection {
     background: rgba(0, 212, 255, 0.25);
     color: #fff;
+    /* 드래그 선택 색상 */
   }
 
   ::-webkit-scrollbar {
     width: 6px;
+    /* 스크롤바 폭 */
   }
+
   ::-webkit-scrollbar-track {
     background: var(--color-bg-primary);
+    /* 스크롤바 트랙 배경 */
   }
+
   ::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.15);
     border-radius: 3px;
+    /* 스크롤바 손잡이 */
   }
+
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.25);
+    /* hover 시 더 진하게 */
   }
 }
 
@@ -81,11 +111,14 @@
     border: 1px solid var(--color-border-subtle);
     border-radius: 16px;
     transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    /* 이 프로젝트의 대표 카드 스타일 */
   }
+
   .glass-card:hover {
     background: var(--color-bg-card-hover);
     border-color: var(--color-border-medium);
     transform: translateY(-2px);
+    /* 마우스 올리면 살짝 떠오르고 더 밝아짐 */
   }
 
   /* Gradient Border Card */
@@ -94,7 +127,9 @@
     background: var(--color-bg-card);
     border-radius: 16px;
     overflow: hidden;
+    /* 카드 자체는 일반 카드처럼 보이지만 */
   }
+
   .gradient-border::before {
     content: "";
     position: absolute;
@@ -107,9 +142,11 @@
       rgba(139, 92, 246, 0.4),
       rgba(236, 72, 153, 0.2)
     );
+    /* before 가상 요소에만 그라디언트를 주고 */
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    /* 안쪽을 비워서 테두리처럼 보이게 만든다. */
     pointer-events: none;
   }
 
@@ -127,7 +164,9 @@
     cursor: pointer;
     transition: all 0.3s ease;
     overflow: hidden;
+    /* 프로젝트 공통 CTA 버튼 */
   }
+
   .glow-button::before {
     content: "";
     position: absolute;
@@ -138,10 +177,13 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: -1;
+    /* hover 시 바깥으로 퍼지는 glow 효과 */
   }
+
   .glow-button:hover::before {
     opacity: 0.6;
   }
+
   .glow-button:hover {
     transform: translateY(-1px);
   }
@@ -157,6 +199,7 @@
       rgba(139, 92, 246, 0.3) 70%,
       transparent
     );
+    /* 섹션 사이를 나누는 얇은 라인 */
   }
 
   /* Neon Text */
@@ -165,6 +208,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* 텍스트 자체를 그라디언트처럼 보이게 하는 공통 스타일 */
   }
 
   /* Animated Grid Background */
@@ -173,6 +217,7 @@
       linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 60px 60px;
+    /* 페이지 배경 격자 */
   }
 
   /* Glow Dot */
@@ -182,6 +227,7 @@
     border-radius: 50%;
     background: var(--color-accent-cyan);
     box-shadow: 0 0 12px var(--color-accent-cyan), 0 0 24px rgba(0, 212, 255, 0.3);
+    /* 배지나 태그 옆의 작은 빛 점 */
   }
 
   /* Tag/Badge */
@@ -198,6 +244,7 @@
     border: 1px solid var(--color-border-medium);
     background: var(--color-bg-card);
     color: var(--color-text-secondary);
+    /* 공통 뱃지 스타일 */
   }
 
   /* Step connector line */
@@ -208,6 +255,7 @@
       var(--color-accent-cyan),
       var(--color-accent-purple)
     );
+    /* 타임라인형 섹션에서 연결선으로 사용 */
   }
 }
 
@@ -221,10 +269,13 @@
     pointer-events: none;
     z-index: 9999;
     opacity: 0.4;
+    /* 화면 전체 위에 아주 약한 노이즈 텍스처를 덮는다.
+       layout.tsx의 body에 noise-overlay가 연결되어 있다. */
   }
 
   .text-balance {
     text-wrap: balance;
+    /* 줄바꿈이 너무 한쪽으로 쏠리지 않게 균형 있게 정리 */
   }
 }
 
@@ -232,49 +283,60 @@
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-12px); }
+  /* 떠다니는 구체 효과용 */
 }
 
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
+  /* 빛이 깜빡이는 효과 */
 }
 
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+  /* 배경 그라디언트 흐름 */
 }
 
 @keyframes slide-up {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+  /* 아래에서 올라오는 등장 */
 }
 
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
+  /* 단순 페이드 */
 }
 
 @keyframes scan-line {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100vh); }
+  /* 히어로의 얇은 스캔 라인 움직임 */
 }
 
 @keyframes rotate-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+  /* 천천히 회전하는 배경 효과용 */
 }
 
 @keyframes dash {
   to { stroke-dashoffset: 0; }
+  /* svg stroke 그려지는 효과용 */
 }
 
 .animate-float { animation: float 6s ease-in-out infinite; }
 .animate-float-delay { animation: float 6s ease-in-out infinite 2s; }
 .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
 .animate-gradient-shift {
   background-size: 200% 200%;
   animation: gradient-shift 4s ease infinite;
 }
+
 .animate-scan-line { animation: scan-line 8s linear infinite; }
 .animate-rotate-slow { animation: rotate-slow 30s linear infinite; }
+/* 실제 클래스명으로 keyframe을 연결하는 마지막 부분 */
