@@ -4,19 +4,28 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLanguage, Language } from "@/lib/i18n";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Technology", href: "/#technology" },
-  { label: "Studio", href: "/#studio" },
-  // { label: "Experience", href: "/experience" },
-  { label: "Contact", href: "/contact" },
+const langOptions: { code: Language; label: string }[] = [
+  { code: "en", label: "EN" },
+  { code: "ko", label: "KR" },
+  { code: "ja", label: "JP" },
 ];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const { lang, setLang, t } = useLanguage();
+
+  const navItems = [
+    { label: t("nav.home"), href: "/" },
+    // { label: t("nav.technology"), href: "/#technology" },
+    // { label: t("nav.studio"), href: "/#studio" },
+    // { label: t("nav.experience"), href: "/experience" },
+    { label: t("nav.b2b"), href: "https://business.vision3.ai" },
+    { label: t("nav.contact"), href: "/contact" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -52,24 +61,9 @@ export default function Header() {
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[var(--color-accent-cyan)] to-[var(--color-accent-purple)] opacity-80 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute inset-[2px] rounded-[6px] bg-[var(--color-bg-primary)] flex items-center justify-center">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M12 2L2 7L12 12L22 7L12 2Z"
-                      stroke="url(#logo-grad)"
-                      strokeWidth="2"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M2 17L12 22L22 17"
-                      stroke="url(#logo-grad)"
-                      strokeWidth="2"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M2 12L12 17L22 12"
-                      stroke="url(#logo-grad)"
-                      strokeWidth="2"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#logo-grad)" strokeWidth="2" strokeLinejoin="round" />
+                    <path d="M2 17L12 22L22 17" stroke="url(#logo-grad)" strokeWidth="2" strokeLinejoin="round" />
+                    <path d="M2 12L12 17L22 12" stroke="url(#logo-grad)" strokeWidth="2" strokeLinejoin="round" />
                     <defs>
                       <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22">
                         <stop stopColor="#00d4ff" />
@@ -79,10 +73,7 @@ export default function Header() {
                   </svg>
                 </div>
               </div>
-              <span
-                className="text-lg font-bold tracking-tight"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
+              <span className="text-lg font-bold tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
                 Vision
                 <span className="neon-text ml-1">3</span>
               </span>
@@ -100,9 +91,7 @@ export default function Header() {
                     href={item.href}
                     onClick={() => handleNavClick(item.href)}
                     className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                      isActive
-                        ? "text-white"
-                        : "text-[var(--color-text-secondary)] hover:text-white"
+                      isActive ? "text-white" : "text-[var(--color-text-secondary)] hover:text-white"
                     }`}
                   >
                     {isActive && (
@@ -118,13 +107,27 @@ export default function Header() {
               })}
             </div>
 
-            {/* CTA Button (desktop) */}
-            <div className="hidden md:block">
-              <Link
-                href="/experience"
-                className="glow-button text-sm"
-              >
-                Try Demo
+            {/* Right side: Lang Toggle + CTA */}
+            <div className="hidden md:flex items-center gap-3">
+              {/* Language Toggle */}
+              <div className="flex items-center rounded-lg border border-[var(--color-border-medium)] bg-[var(--color-bg-card)] overflow-hidden">
+                {langOptions.map((opt) => (
+                  <button
+                    key={opt.code}
+                    onClick={() => setLang(opt.code)}
+                    className={`px-3 py-1.5 text-xs font-bold transition-all duration-300 ${
+                      lang === opt.code
+                        ? "bg-gradient-to-r from-[var(--color-accent-cyan)] to-[var(--color-accent-purple)] text-white"
+                        : "text-[var(--color-text-muted)] hover:text-white"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+
+              <Link href="/experience" className="glow-button text-sm">
+                {t("nav.tryDemo")}
               </Link>
             </div>
 
@@ -135,21 +138,9 @@ export default function Header() {
               aria-label="Toggle menu"
             >
               <div className="w-5 flex flex-col gap-1.5">
-                <span
-                  className={`block h-[1.5px] bg-white transition-all duration-300 ${
-                    mobileOpen ? "rotate-45 translate-y-[4.5px]" : ""
-                  }`}
-                />
-                <span
-                  className={`block h-[1.5px] bg-white transition-all duration-300 ${
-                    mobileOpen ? "opacity-0" : ""
-                  }`}
-                />
-                <span
-                  className={`block h-[1.5px] bg-white transition-all duration-300 ${
-                    mobileOpen ? "-rotate-45 -translate-y-[4.5px]" : ""
-                  }`}
-                />
+                <span className={`block h-[1.5px] bg-white transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-[4.5px]" : ""}`} />
+                <span className={`block h-[1.5px] bg-white transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
+                <span className={`block h-[1.5px] bg-white transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[4.5px]" : ""}`} />
               </div>
             </button>
           </nav>
@@ -166,7 +157,24 @@ export default function Header() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 top-20 z-40 bg-[rgba(6,6,14,0.97)] backdrop-blur-2xl md:hidden"
           >
-            <div className="flex flex-col items-center justify-center gap-6 pt-16">
+            <div className="flex flex-col items-center justify-center gap-6 pt-12">
+              {/* Mobile Language Toggle */}
+              <div className="flex items-center rounded-lg border border-[var(--color-border-medium)] bg-[var(--color-bg-card)] overflow-hidden mb-4">
+                {langOptions.map((opt) => (
+                  <button
+                    key={opt.code}
+                    onClick={() => setLang(opt.code)}
+                    className={`px-5 py-2 text-sm font-bold transition-all duration-300 ${
+                      lang === opt.code
+                        ? "bg-gradient-to-r from-[var(--color-accent-cyan)] to-[var(--color-accent-purple)] text-white"
+                        : "text-[var(--color-text-muted)] hover:text-white"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.href}
@@ -191,7 +199,7 @@ export default function Header() {
                 className="mt-4"
               >
                 <Link href="/experience" className="glow-button" onClick={() => setMobileOpen(false)}>
-                  Try Demo
+                  {t("nav.tryDemo")}
                 </Link>
               </motion.div>
             </div>

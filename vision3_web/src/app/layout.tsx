@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { LanguageProvider } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "AI Production Studio | From Character to Video",
+  title: "AI Production Studio",
   description:
     "AI-powered end-to-end production platform. Character creation, scriptwriting, and video generation — unified into one seamless workflow.",
   keywords: [
@@ -35,7 +36,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] antialiased noise-overlay">
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
