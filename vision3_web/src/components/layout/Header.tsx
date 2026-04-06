@@ -55,6 +55,7 @@ export default function Header() {
     // { label: t("nav.studio"), href: "/#studio" },
     // { label: t("nav.experience"), href: "/experience" },
     { label: t("nav.b2b"), href: "https://business.vision3.ai" },
+    { label: t("nav.ott"), href: "/ott" },
     { label: t("nav.contact"), href: "/contact" },
   ];
   // 헤더 메뉴 데이터다.

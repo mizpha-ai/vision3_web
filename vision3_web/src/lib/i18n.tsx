@@ -33,6 +33,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.experience": "Experience",
     "nav.contact": "Contact",
     "nav.b2b": "B2B Solutions",
+    "nav.ott": "OTT",
     "nav.tryDemo": "Try Demo",
 
     // ── Hero ──
@@ -385,6 +386,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.experience": "체험",
     "nav.contact": "문의",
     "nav.b2b": "B2B 솔루션",
+    "nav.ott": "OTT",
     "nav.tryDemo": "데모 체험",
 
     "hero.badge": "제품 가이드 v1.0 — 2026년 2월",
@@ -724,6 +726,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.experience": "体験",
     "nav.contact": "お問い合わせ",
     "nav.b2b": "B2Bソリューション",
+    "nav.ott": "OTT",
     "nav.tryDemo": "デモ体験",
 
     "hero.badge": "プロダクトガイド v1.0 — 2026年2月",
